@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2025 年度男友評鑑報告</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap');
+
+        :root {
+            --primary: #ff8fa3;
+            --secondary: #fff0f3;
+            --text: #595959;
+            --accent: #ff4d6d;
+        }
+
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: #ffe5ec;
+            background-image: radial-gradient(#ffb3c1 1px, transparent 1px);
+            background-size: 20px 20px;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: var(--text);
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            width: 100%;
+            max-width: 600px;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(255, 143, 163, 0.3);
+            border: 2px solid white;
+            position: relative;
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--accent);
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #888;
+            font-size: 0.9rem;
+            margin-bottom: 30px;
+            border-bottom: 2px dashed var(--primary);
+            padding-bottom: 20px;
+        }
+
+        .question-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            font-weight: 700;
+            display: block;
+            margin-bottom: 8px;
+            color: #444;
+        }
+
+        /* Range Slider Styling */
+        input[type="range"] {
+            width: 100%;
+            accent-color: var(--accent);
+            cursor: pointer;
+        }
+
+        .range-value {
+            text-align: right;
+            font-size: 0.9rem;
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        /* Text Input Styling */
+        textarea,
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid var(--secondary);
+            border-radius: 10px;
+            background: #fff;
+            font-family: inherit;
+            box-sizing: border-box;
+            /* Fix padding issue */
+            resize: none;
+            transition: 0.3s;
+        }
+
+        textarea:focus,
+        input[type="text"]:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: #fffafa;
+        }
+
+        /* Radio Styling */
+        .radio-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .radio-label {
+            font-weight: 400;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* Button Styling */
+        .btn-container {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        button {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4);
+            transition: transform 0.2s;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            background: #e01e37;
+        }
+
+        .footer-note {
+            text-align: center;
+            font-size: 0.8rem;
+            color: #aaa;
+            margin-top: 30px;
+        }
+
+        /* 隱藏截圖時不需要的元素 */
+        .hide-on-capture {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container" id="capture-area">
+        <h1>💖 2025 年度男友評鑑表</h1>
+        <div class="subtitle">受評人：全世界最可愛的女友的男朋友</div>
+
+        <form id="loveForm">
+            <div class="question-group">
+                <label>1. 綜合評分：這一整年你給他幾分？</label>
+                <input type="range" min="1" max="10" value="5" oninput="updateVal(this, 'val1')">
+                <div class="range-value"><span id="val1">5</span> 分</div>
+            </div>
+
+            <div class="question-group">
+                <label>2. 顏值審查：看著他的臉，心動指數是？</label>
+                <input type="range" min="1" max="10" value="5" oninput="updateVal(this, 'val2')">
+                <div class="range-value"><span id="val2">5</span> 分</div>
+            </div>
+
+            <div class="question-group">
+                <label>3. 情緒價值：心情不好時，他的安撫能力？</label>
+                <input type="range" min="1" max="10" value="5" oninput="updateVal(this, 'val3')">
+                <div class="range-value"><span id="val3">5</span> 分</div>
+            </div>
+
+            <div class="question-group">
+                <label>4. 生存技能：家事或跑腿的勤勞度？</label>
+                <input type="range" min="1" max="10" value="5" oninput="updateVal(this, 'val4')">
+                <div class="range-value"><span id="val4">5</span> 分</div>
+            </div>
+
+            <div class="question-group">
+                <label>5. 求生欲測試：關鍵時刻他反應如何？</label>
+                <div class="radio-group">
+                    <label class="radio-label"><input type="radio" name="survival" value="求生欲極高" checked> 求生欲極高</label>
+                    <label class="radio-label"><input type="radio" name="survival" value="普通"> 普通</label>
+                    <label class="radio-label"><input type="radio" name="survival" value="遲鈍想揍人"> 遲鈍想揍人</label>
+                </div>
+            </div>
+
+            <div class="question-group">
+                <label>6. 安全感：是否讓你感到安心與信任？</label>
+                <input type="range" min="1" max="10" value="5" oninput="updateVal(this, 'val6')">
+                <div class="range-value"><span id="val6">5</span> 分</div>
+            </div>
+
+            <div class="question-group">
+                <label>7. 年度高光：今年他做過最讓你感動的事？</label>
+                <textarea rows="3" placeholder="請填寫..."></textarea>
+            </div>
+
+            <div class="question-group">
+                <label>8. 待改進：明年希望他改進的一個缺點？</label>
+                <textarea rows="3" placeholder="請填寫..."></textarea>
+            </div>
+
+            <div class="question-group">
+                <label>9. 續約意願：是否願意續約至明年？</label>
+                <div class="radio-group">
+                    <label class="radio-label"><input type="radio" name="renew" value="當然願意" checked> 當然願意</label>
+                    <label class="radio-label"><input type="radio" name="renew" value="考慮一下"> 考慮一下</label>
+                    <label class="radio-label"><input type="radio" name="renew" value="看他表現"> 看他表現</label>
+                </div>
+            </div>
+
+            <div class="question-group">
+                <label>10. 最後，給辛苦了一年的他說一句話：</label>
+                <textarea rows="3" placeholder="想對你說..."></textarea>
+            </div>
+
+            <div class="question-group" style="margin-top: 30px; border-top: 1px solid #eee; padding-top: 20px;">
+                <label>評分日期：<span id="currentDate"></span></label>
+                <label>女友簽名：</label>
+                <input type="text" placeholder="請在此簽名" style="font-family: 'cursive', sans-serif; font-size: 1.2rem;">
+            </div>
+
+            <div class="btn-container hide-on-capture" id="submitBtnArea">
+                <button type="button" onclick="generateImage()">💌 完成並生成報告卡</button>
+            </div>
+        </form>
+        <div class="footer-note">Designed by 小奈 AI | 2025 Edition</div>
+    </div>
+
+    <script>
+        // 設定今天的日期
+        const today = new Date();
+        document.getElementById('currentDate').innerText = today.getFullYear() + '/' + (today.getMonth() + 1) + '/' + today.getDate();
+
+        // 更新滑桿數值顯示
+        function updateVal(input, id) {
+            document.getElementById(id).innerText = input.value;
+        }
+
+        // 生成圖片功能
+        function generateImage() {
+            const captureArea = document.getElementById('capture-area');
+            const btnArea = document.getElementById('submitBtnArea');
+
+            // 1. 暫時隱藏按鈕
+            btnArea.style.display = 'none';
+
+            // 2. 調整樣式以適應截圖（避免滾動條影響）
+            window.scrollTo(0, 0);
+
+            // 3. 使用 html2canvas 截圖
+            html2canvas(captureArea, {
+                scale: 2, // 提高解析度
+                backgroundColor: null, // 保持透明或背景色
+                useCORS: true
+            }).then(canvas => {
+                // 4. 創建下載連結
+                const link = document.createElement('a');
+                link.download = '2025男友年度評鑑報告.png';
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+
+                // 5. 恢復按鈕顯示
+                btnArea.style.display = 'block';
+                alert('報告卡已生成並下載！請查收圖片 ❤️');
+            }).catch(err => {
+                console.error("生成失敗:", err);
+                alert("生成圖片失敗，請用手機截圖試試看！");
+                btnArea.style.display = 'block';
+            });
+        }
+    </script>
+</body>
+
+</html>
